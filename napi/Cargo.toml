@@ -16,8 +16,8 @@ crate-type = ["cdylib"]
 [dependencies]
 napi = "3.6.1"
 napi-derive = "3.4.0"
-puniyu_skia.workspace = true
 
+puniyu_skia.workspace = true
 puniyu_component_help ={ path = "../packages/puniyu_component_help"}
 
 [build-dependencies]

@@ -14,7 +14,7 @@ edition = "2024"
 rust-version = "1.88.0"
 
 [workspace.dependencies]
-puniyu_skia = { version = "0.5", path = "../skia"}
+puniyu_skia = "0.5.1"
 thiserror = "2.0.17"
 
 [profile.release]
