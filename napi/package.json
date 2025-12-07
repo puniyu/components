@@ -1,0 +1,50 @@
+{
+  "name": "@puniyu/component",
+  "version": "1.8.0",
+  "description": "一个常用组件库",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "author": "puniyu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puniyu/components.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "napi-rs",
+    "NAPI",
+    "N-API",
+    "Rust",
+    "node-addon",
+    "node-addon-api",
+    "component"
+  ],
+  "files": [
+    "dist"
+  ],
+  "napi": {
+    "binaryName": "component",
+    "targets": [
+      "x86_64-pc-windows-msvc",
+      "x86_64-apple-darwin",
+      "x86_64-unknown-linux-gnu",
+      "aarch64-unknown-linux-gnu",
+      "aarch64-apple-darwin"
+    ],
+    "dtsHeader": "// powered by puniyu_component\n"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "napi build --platform --release -p puniyu_component_napi --esm -o dist",
+    "prepublishOnly": "napi prepublish --no-gh-release",
+    "create-npm-dirs": "napi create-npm-dirs"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^3.4.1"
+  },
+  "packageManager": "pnpm@10.24.0"
+}
