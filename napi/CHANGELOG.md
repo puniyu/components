@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/puniyu/components/compare/napi-v0.4.1...napi-v0.4.2) (2025-12-07)
+
+
+### 🔧 其他更新
+
+* **napi:** Synchronize component versions
+
 ## [0.4.1](https://github.com/puniyu/components/compare/napi-v0.4.0...napi-v0.4.1) (2025-12-07)
 
 

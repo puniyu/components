@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/puniyu/components/compare/help-v0.4.1...help-v0.4.2) (2025-12-07)
+
+
+### 📦️ 构建系统
+
+* **workflow:** 更新构建工作流配置 ([a1dc318](https://github.com/puniyu/components/commit/a1dc31839d19200d4a54be4873c871f457b51239))
+
 ## [0.4.1](https://github.com/puniyu/components/compare/help-v0.4.0...help-v0.4.1) (2025-12-07)
 
 
