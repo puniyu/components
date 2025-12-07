@@ -40,8 +40,10 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
     const DEFAULT_TEXT_COLOR: Color = Color::from_argb(255, 50, 50, 60);
     const DEFAULT_DESC_COLOR: Color = Color::from_argb(200, 80, 80, 90);
 
-    let bg_color = help_list.theme.background_color;
-    let main_title_height = MAIN_TITLE_FONT_SIZE + PADDING;
+    let theme = help_list.theme.as_ref().cloned().unwrap_or_default();
+    let bg_color = theme.background_color;
+    let has_main_title = help_list.title.is_some();
+    let main_title_height = if has_main_title { MAIN_TITLE_FONT_SIZE + PADDING } else { 0.0 };
     let title_section_height = TITLE_FONT_SIZE + PADDING;
     let total_gap = CARD_GAP * (COLS as f32 - 1.0);
     let card_width = (WIDTH as f32 - PADDING * 2.0 - total_gap) / COLS as f32;
@@ -62,26 +64,28 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
     let canvas = surface.canvas();
     canvas.scale((SCALE_FACTOR, SCALE_FACTOR));
 
-    let bg_image = draw_background(canvas, help_list.theme.background.as_deref().unwrap_or(&[]), bg_color, height)?;
+    let bg_image = draw_background(canvas, theme.background.as_deref().unwrap_or(&[]), bg_color, height)?;
 
     let mut font_manager = FontManger::new();
     font_manager.register_font(FONT, None).unwrap();
     let font_collection = font_manager.font_collection();
 
-    let title_color = help_list.theme.title_color;
+    let title_color = theme.title_color;
 
-    draw_text(
-        canvas,
-        &help_list.title,
-        &TextParams {
-            rect: Rect::from_xywh(0.0, PADDING, WIDTH as f32, MAIN_TITLE_FONT_SIZE),
-            font_size: MAIN_TITLE_FONT_SIZE,
-            color: title_color,
-            font_family: FONT_FAMILY,
-            align: TextAlign::Center,
-        },
-        font_collection,
-    );
+    if let Some(title) = &help_list.title {
+        draw_text(
+            canvas,
+            title,
+            &TextParams {
+                rect: Rect::from_xywh(0.0, PADDING, WIDTH as f32, MAIN_TITLE_FONT_SIZE),
+                font_size: MAIN_TITLE_FONT_SIZE,
+                color: title_color,
+                font_family: FONT_FAMILY,
+                align: TextAlign::Center,
+            },
+            font_collection,
+        );
+    }
 
     let mut current_y = PADDING + main_title_height;
 
@@ -118,13 +122,14 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
             let has_icon = item.icon.as_ref().is_some_and(|v| !v.is_empty());
             let content_y = card_y + CARD_PADDING;
 
+            let icon_offset_y = (ICON_SIZE - NAME_FONT_SIZE) / 2.0;
+
             let name_x = if has_icon {
                 draw_icon(
                     canvas,
                     item.icon.as_deref().unwrap(),
-                    card_x + CARD_PADDING,
-                    content_y,
-                    ICON_SIZE,
+                    Rect::from_xywh(card_x + CARD_PADDING, content_y - icon_offset_y, ICON_SIZE, ICON_SIZE),
+                    SCALE_FACTOR,
                 )?;
                 card_x + CARD_PADDING + ICON_SIZE + ICON_TEXT_GAP
             } else {

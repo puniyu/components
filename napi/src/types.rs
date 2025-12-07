@@ -55,8 +55,8 @@ fn parse_color(s: &str) -> Color {
 
 #[napi(object)]
 pub struct HelpList {
-	pub title: String,
-	pub theme: Theme,
+	pub title: Option<String>,
+	pub theme: Option<Theme>,
 	pub list: Vec<HelpGroup>,
 }
 
@@ -64,7 +64,7 @@ impl From<HelpList> for puniyu_component_help::HelpList {
 	fn from(list: HelpList) -> Self {
 		Self {
 			title: list.title,
-			theme: list.theme.into(),
+			theme: list.theme.map(|t| t.into()),
 			list: list.list.into_iter().map(|group| group.into()).collect()
 		}
 	}

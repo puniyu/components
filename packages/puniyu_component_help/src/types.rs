@@ -3,8 +3,8 @@ use puniyu_skia::Color;
 /// 帮助列表配置
 #[derive(Debug)]
 pub struct HelpList {
-    pub title: String,
-    pub theme: Theme,
+    pub title: Option<String>,
+    pub theme: Option<Theme>,
     pub list: Vec<HelpGroup>,
 }
 
@@ -22,7 +22,7 @@ pub struct HelpItem {
     pub icon: Option<Vec<u8>>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Theme {
     pub background: Option<Vec<u8>>,
     pub background_color: Color,

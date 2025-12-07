@@ -106,22 +106,38 @@ pub fn draw_card(
 pub fn draw_icon(
     canvas: &Canvas,
     icon_data: &[u8],
-    x: f32,
-    y: f32,
-    size: f32,
+    rect: Rect,
+    scale_factor: f32,
 ) -> Result<(), Error> {
-    let png_data = convert_png(icon_data, size as u32)?;
+    let render_size = (rect.width().max(rect.height()) * scale_factor) as u32;
+    let png_data = convert_png(icon_data, render_size)?;
     let data = Data::new_copy(&png_data);
     let image = Image::from_encoded(data).ok_or(Error::Decode)?;
 
-    let dst_rect = Rect::from_xywh(x, y + (size - image.height() as f32) / 2.0, size, size);
-    let src_rect = Rect::from_wh(image.width() as f32, image.height() as f32);
+    let img_w = image.width() as f32;
+    let img_h = image.height() as f32;
+    let scale = (rect.width() / img_w).min(rect.height() / img_h);
+    let scaled_w = img_w * scale;
+    let scaled_h = img_h * scale;
+    let offset_x = (rect.width() - scaled_w) / 2.0;
+    let offset_y = (rect.height() - scaled_h) / 2.0;
+
+    let dst_rect = Rect::from_xywh(
+        rect.x() + offset_x,
+        rect.y() + offset_y,
+        scaled_w,
+        scaled_h,
+    );
+    let src_rect = Rect::from_wh(img_w, img_h);
+
+    let mut paint = Paint::default();
+    paint.set_anti_alias(true);
 
     canvas.draw_image_rect(
         &image,
-        Some((&src_rect, puniyu_skia::canvas::SrcRectConstraint::Fast)),
+        Some((&src_rect, puniyu_skia::canvas::SrcRectConstraint::Strict)),
         dst_rect,
-        &Paint::default(),
+        &paint,
     );
 
     Ok(())

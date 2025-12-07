@@ -121,6 +121,6 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
           files: |
-            napi/artifacts/napi-*/*.node
+            napi/artifacts/component-node-*/*.node
           tag_name: ${{ needs.release.outputs.napi_tag_name }}
 
