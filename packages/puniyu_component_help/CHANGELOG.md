@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/puniyu/components/compare/help-v0.4.0...help-v0.4.1) (2025-12-07)
+
+
+### 🔧 其他更新
+
+* **help:** 支持背景图片和纯色背景配置 ([f05c4f8](https://github.com/puniyu/components/commit/f05c4f8d79d4b8a1d3746777fe91327f312049d6))
+
 ## [0.4.0](https://github.com/puniyu/components/compare/help-v0.3.2...help-v0.4.0) (2025-12-07)
 
 
