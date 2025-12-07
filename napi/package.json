@@ -1,6 +1,6 @@
 {
   "name": "@puniyu/component",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "一个常用组件库",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
