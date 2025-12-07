@@ -7,7 +7,7 @@ use puniyu_skia::textlayout::TextAlign;
 
 pub use error::Error;
 use render::{TextParams, draw_background, draw_card, draw_icon, draw_text};
-pub use types::{HelpGroup, HelpItem, HelpList, Theme};
+pub use types::{Background, HelpGroup, HelpItem, HelpList, Theme};
 
 const FONT: &[u8] = include_bytes!("../fonts/DouyinSansBold.ttf");
 
@@ -41,7 +41,8 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
     const DEFAULT_DESC_COLOR: Color = Color::from_argb(200, 80, 80, 90);
 
     let theme = help_list.theme.as_ref().cloned().unwrap_or_default();
-    let bg_color = theme.background_color;
+    let background = theme.background.clone().unwrap_or_default();
+    let title_color = theme.title_color.unwrap_or(Color::from_argb(255, 0, 0, 0));
     let has_main_title = help_list.title.is_some();
     let main_title_height = if has_main_title { MAIN_TITLE_FONT_SIZE + PADDING } else { 0.0 };
     let title_section_height = TITLE_FONT_SIZE + PADDING;
@@ -64,13 +65,12 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
     let canvas = surface.canvas();
     canvas.scale((SCALE_FACTOR, SCALE_FACTOR));
 
-    let bg_image = draw_background(canvas, theme.background.as_deref().unwrap_or(&[]), bg_color, height)?;
+    let bg_image = draw_background(canvas, &background, height)?;
 
     let mut font_manager = FontManger::new();
     font_manager.register_font(FONT, None).unwrap();
     let font_collection = font_manager.font_collection();
 
-    let title_color = theme.title_color;
 
     if let Some(title) = &help_list.title {
         draw_text(

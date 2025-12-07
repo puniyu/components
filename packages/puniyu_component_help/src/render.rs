@@ -5,44 +5,47 @@ use puniyu_skia::{
 };
 
 use crate::{Error, WIDTH, CARD_RADIUS, BLUR_SIGMA};
+use crate::types::Background;
 
 /// 绘制背景
 pub fn draw_background(
     canvas: &Canvas,
-    background_data: &[u8],
-    bg_color: Color,
+    background: &Background,
     height: i32,
 ) -> Result<Option<Image>, Error> {
-    if background_data.is_empty() {
-        canvas.clear(bg_color);
-        return Ok(None);
+    match background {
+        Background::Color(color) => {
+            canvas.clear(*color);
+            Ok(None)
+        }
+        Background::Image(data) => {
+            let data = Data::new_copy(data);
+            let image = Image::from_encoded(data).ok_or(Error::Decode)?;
+
+            let img_w = image.width() as f32;
+            let img_h = image.height() as f32;
+            let dst_w = WIDTH as f32;
+            let dst_h = height as f32;
+
+            let scale = (dst_w / img_w).max(dst_h / img_h);
+            let src_w = dst_w / scale;
+            let src_h = dst_h / scale;
+            let src_x = (img_w - src_w) / 2.0;
+            let src_y = (img_h - src_h) / 2.0;
+
+            let src_rect = Rect::from_xywh(src_x, src_y, src_w, src_h);
+            let dst_rect = Rect::from_wh(dst_w, dst_h);
+
+            canvas.draw_image_rect(
+                &image,
+                Some((&src_rect, puniyu_skia::canvas::SrcRectConstraint::Fast)),
+                dst_rect,
+                &Paint::default(),
+            );
+
+            Ok(Some(image))
+        }
     }
-
-    let data = Data::new_copy(background_data);
-    let image = Image::from_encoded(data).ok_or(Error::Decode)?;
-
-    let img_w = image.width() as f32;
-    let img_h = image.height() as f32;
-    let dst_w = WIDTH as f32;
-    let dst_h = height as f32;
-
-    let scale = (dst_w / img_w).max(dst_h / img_h);
-    let src_w = dst_w / scale;
-    let src_h = dst_h / scale;
-    let src_x = (img_w - src_w) / 2.0;
-    let src_y = (img_h - src_h) / 2.0;
-
-    let src_rect = Rect::from_xywh(src_x, src_y, src_w, src_h);
-    let dst_rect = Rect::from_wh(dst_w, dst_h);
-
-    canvas.draw_image_rect(
-        &image,
-        Some((&src_rect, puniyu_skia::canvas::SrcRectConstraint::Fast)),
-        dst_rect,
-        &Paint::default(),
-    );
-
-    Ok(Some(image))
 }
 
 /// 绘制毛玻璃卡片

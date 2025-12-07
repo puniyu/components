@@ -22,19 +22,24 @@ pub struct HelpItem {
     pub icon: Option<Vec<u8>>,
 }
 
+/// 背景类型
 #[derive(Debug, Clone)]
-pub struct Theme {
-    pub background: Option<Vec<u8>>,
-    pub background_color: Color,
-    pub title_color: Color,
+pub enum Background {
+    /// 图片背景
+    Image(Vec<u8>),
+    /// 纯色背景
+    Color(Color),
 }
 
-impl Default for Theme {
+impl Default for Background {
     fn default() -> Self {
-        Self {
-            background: None,
-            background_color: Color::from_argb(255, 245, 245, 250),
-            title_color: Color::from_argb(255, 0, 0, 0),
-        }
+        Self::Color(Color::from_argb(255, 245, 245, 250))
     }
 }
+
+#[derive(Debug, Clone, Default)]
+pub struct Theme {
+    pub background: Option<Background>,
+    pub title_color: Option<Color>,
+}
+

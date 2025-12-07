@@ -105,17 +105,26 @@ impl From<HelpItem> for puniyu_component_help::HelpItem {
 
 #[napi(object)]
 pub struct Theme {
-	pub background: Option<Buffer>,
-	pub background_color: String,
-	pub title_color: String,
+	/// 背景图片数据
+	pub background_image: Option<Buffer>,
+	/// 背景颜色（如 "#RRGGBB" 或 "#AARRGGBB"），与 background_image 二选一
+	pub background_color: Option<String>,
+	/// 标题颜色
+	pub title_color: Option<String>,
 }
 
 impl From<Theme> for puniyu_component_help::Theme {
 	fn from(theme: Theme) -> Self {
+		use puniyu_component_help::Background;
+
+		let background = theme
+			.background_image
+			.map(|img| Background::Image(img.to_vec()))
+			.or_else(|| theme.background_color.as_ref().map(|c| Background::Color(parse_color(c))));
+
 		Self {
-			background: theme.background.map(|v| v.to_vec()),
-			background_color: parse_color(&theme.background_color),
-			title_color: parse_color(&theme.title_color),
+			background,
+			title_color: theme.title_color.as_ref().map(|c| parse_color(c)),
 		}
 	}
 }
