@@ -131,8 +131,6 @@ pub fn draw_icon(
 fn convert_png(icon_data: &[u8], size: u32) -> Result<Vec<u8>, Error> {
     use image::ImageReader;
     use std::io::Cursor;
-
-    // 尝试解析为 SVG
     if let Ok(tree) = resvg::usvg::Tree::from_data(icon_data, &resvg::usvg::Options::default()) {
         let mut pixmap = resvg::tiny_skia::Pixmap::new(size, size).ok_or(Error::Encode)?;
         let scale = size as f32 / tree.size().width().max(tree.size().height());
@@ -141,7 +139,6 @@ fn convert_png(icon_data: &[u8], size: u32) -> Result<Vec<u8>, Error> {
         return pixmap.encode_png().map_err(|_| Error::Encode);
     }
 
-    // 其他格式使用 image crate
     let img = ImageReader::new(Cursor::new(icon_data))
         .with_guessed_format()
         .map_err(|_| Error::Decode)?
