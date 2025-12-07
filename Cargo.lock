@@ -1180,9 +1180,9 @@ dependencies = [
 
 [[package]]
 name = "puniyu_skia"
-version = "0.5.2"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2525c36d0c7baf431ce28eb989d626648f6d8271e8530a8bc914e35795fdc49d"
+checksum = "040450c038a81f4cb82049a3c6ad897cd2a1fea65d982c37e33541b33c51d14f"
 dependencies = [
  "skia-safe",
  "thiserror",
