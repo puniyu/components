@@ -89,7 +89,7 @@ impl From<HelpGroup> for puniyu_component_help::HelpGroup {
 pub struct HelpItem {
 	pub name: String,
 	pub desc: String,
-	pub icon: Buffer,
+	pub icon: Option<Buffer>,
 }
 
 
@@ -98,14 +98,14 @@ impl From<HelpItem> for puniyu_component_help::HelpItem {
 		Self {
 			name: itm.name,
 			desc: itm.desc,
-			icon: itm.icon.to_vec(),
+			icon: itm.icon.map(|v| v.to_vec()),
 		}
 	}
 }
 
 #[napi(object)]
 pub struct Theme {
-	pub background: Buffer,
+	pub background: Option<Buffer>,
 	pub background_color: String,
 	pub title_color: String,
 }
@@ -113,7 +113,7 @@ pub struct Theme {
 impl From<Theme> for puniyu_component_help::Theme {
 	fn from(theme: Theme) -> Self {
 		Self {
-			background: theme.background.to_vec(),
+			background: theme.background.map(|v| v.to_vec()),
 			background_color: parse_color(&theme.background_color),
 			title_color: parse_color(&theme.title_color),
 		}

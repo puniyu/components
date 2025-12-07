@@ -62,7 +62,7 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
     let canvas = surface.canvas();
     canvas.scale((SCALE_FACTOR, SCALE_FACTOR));
 
-    let bg_image = draw_background(canvas, &help_list.theme.background, bg_color, height)?;
+    let bg_image = draw_background(canvas, help_list.theme.background.as_deref().unwrap_or(&[]), bg_color, height)?;
 
     let mut font_manager = FontManger::new();
     font_manager.register_font(FONT, None).unwrap();
@@ -115,13 +115,13 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
                 height,
             );
 
-            let has_icon = !item.icon.is_empty();
+            let has_icon = item.icon.as_ref().is_some_and(|v| !v.is_empty());
             let content_y = card_y + CARD_PADDING;
 
             let name_x = if has_icon {
                 draw_icon(
                     canvas,
-                    &item.icon,
+                    item.icon.as_deref().unwrap(),
                     card_x + CARD_PADDING,
                     content_y,
                     ICON_SIZE,

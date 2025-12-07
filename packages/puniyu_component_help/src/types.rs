@@ -19,12 +19,12 @@ pub struct HelpGroup {
 pub struct HelpItem {
     pub name: String,
     pub desc: String,
-    pub icon: Vec<u8>,
+    pub icon: Option<Vec<u8>>,
 }
 
 #[derive(Debug)]
 pub struct Theme {
-    pub background: Vec<u8>,
+    pub background: Option<Vec<u8>>,
     pub background_color: Color,
     pub title_color: Color,
 }
@@ -32,7 +32,7 @@ pub struct Theme {
 impl Default for Theme {
     fn default() -> Self {
         Self {
-            background: Vec::new(),
+            background: None,
             background_color: Color::from_argb(255, 245, 245, 250),
             title_color: Color::from_argb(255, 0, 0, 0),
         }
