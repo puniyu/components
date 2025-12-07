@@ -2,8 +2,8 @@ mod error;
 mod render;
 mod types;
 
-use puniyu_skia::{Color, EncodedImageFormat, Rect, font::FontManger, surfaces};
 use puniyu_skia::textlayout::TextAlign;
+use puniyu_skia::{Color, EncodedImageFormat, Rect, font::FontManger, surfaces};
 
 pub use error::Error;
 use render::{TextParams, draw_background, draw_card, draw_icon, draw_text};
@@ -44,7 +44,11 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
     let background = theme.background.clone().unwrap_or_default();
     let title_color = theme.title_color.unwrap_or(Color::from_argb(255, 0, 0, 0));
     let has_main_title = help_list.title.is_some();
-    let main_title_height = if has_main_title { MAIN_TITLE_FONT_SIZE + PADDING } else { 0.0 };
+    let main_title_height = if has_main_title {
+        MAIN_TITLE_FONT_SIZE + PADDING
+    } else {
+        0.0
+    };
     let title_section_height = TITLE_FONT_SIZE + PADDING;
     let total_gap = CARD_GAP * (COLS as f32 - 1.0);
     let card_width = (WIDTH as f32 - PADDING * 2.0 - total_gap) / COLS as f32;
@@ -71,7 +75,6 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
     font_manager.register_font(FONT, None).unwrap();
     let font_collection = font_manager.font_collection();
 
-
     if let Some(title) = &help_list.title {
         draw_text(
             canvas,
@@ -94,7 +97,12 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
             canvas,
             &help_group.name,
             &TextParams {
-                rect: Rect::from_xywh(PADDING, current_y, WIDTH as f32 - PADDING * 2.0, TITLE_FONT_SIZE),
+                rect: Rect::from_xywh(
+                    PADDING,
+                    current_y,
+                    WIDTH as f32 - PADDING * 2.0,
+                    TITLE_FONT_SIZE,
+                ),
                 font_size: TITLE_FONT_SIZE,
                 color: title_color,
                 font_family: FONT_FAMILY,
@@ -128,7 +136,12 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
                 draw_icon(
                     canvas,
                     item.icon.as_deref().unwrap(),
-                    Rect::from_xywh(card_x + CARD_PADDING, content_y - icon_offset_y, ICON_SIZE, ICON_SIZE),
+                    Rect::from_xywh(
+                        card_x + CARD_PADDING,
+                        content_y - icon_offset_y,
+                        ICON_SIZE,
+                        ICON_SIZE,
+                    ),
                     SCALE_FACTOR,
                 )?;
                 card_x + CARD_PADDING + ICON_SIZE + ICON_TEXT_GAP
@@ -140,7 +153,12 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
                 canvas,
                 &item.name,
                 &TextParams {
-                    rect: Rect::from_xywh(name_x, content_y, card_width - CARD_PADDING * 2.0, NAME_FONT_SIZE),
+                    rect: Rect::from_xywh(
+                        name_x,
+                        content_y,
+                        card_width - CARD_PADDING * 2.0,
+                        NAME_FONT_SIZE,
+                    ),
                     font_size: NAME_FONT_SIZE,
                     color: DEFAULT_TEXT_COLOR,
                     font_family: FONT_FAMILY,
@@ -153,7 +171,12 @@ pub fn help(help_list: &HelpList) -> Result<Vec<u8>, Error> {
                 canvas,
                 &item.desc,
                 &TextParams {
-                    rect: Rect::from_xywh(card_x + CARD_PADDING, content_y + NAME_FONT_SIZE + 8.0, card_width - CARD_PADDING * 2.0, DESC_FONT_SIZE),
+                    rect: Rect::from_xywh(
+                        card_x + CARD_PADDING,
+                        content_y + NAME_FONT_SIZE + 8.0,
+                        card_width - CARD_PADDING * 2.0,
+                        DESC_FONT_SIZE,
+                    ),
                     font_size: DESC_FONT_SIZE,
                     color: DEFAULT_DESC_COLOR,
                     font_family: FONT_FAMILY,

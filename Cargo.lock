@@ -1159,7 +1159,7 @@ dependencies = [
 
 [[package]]
 name = "puniyu_component_help"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "image",
  "puniyu_skia",
@@ -1169,7 +1169,7 @@ dependencies = [
 
 [[package]]
 name = "puniyu_component_napi"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "napi",
  "napi-build",
@@ -1180,9 +1180,9 @@ dependencies = [
 
 [[package]]
 name = "puniyu_skia"
-version = "0.5.1"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a5997722ee0709dfd7ea521d68726fb38901848f5f1d7a539704890adfe19cb5"
+checksum = "2525c36d0c7baf431ce28eb989d626648f6d8271e8530a8bc914e35795fdc49d"
 dependencies = [
  "skia-safe",
  "thiserror",
