@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/puniyu/components/compare/help-v0.3.2...help-v0.4.0) (2025-12-07)
+
+
+### ✨ 新功能
+
+* **help:** 支持可选标题和主题配置 ([1fb31af](https://github.com/puniyu/components/commit/1fb31afe442fdc1f36e09bd275041c5f140f8e20))
+
 ## [0.3.2](https://github.com/puniyu/components/compare/help-v0.3.1...help-v0.3.2) (2025-12-07)
 
 
