@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/puniyu/components/compare/napi-v0.3.0...napi-v0.3.1) (2025-12-07)
+
+
+### 🔧 其他更新
+
+* **deps:** 更新 puniyu_skia 依赖版本至 0.5.1 ([91bdd68](https://github.com/puniyu/components/commit/91bdd68c7808fb93d452c2078fc3a821c8a55b11))
+
 ## [0.3.0](https://github.com/puniyu/components/compare/napi-v0.2.0...napi-v0.3.0) (2025-12-07)
 
 

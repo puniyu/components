@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/puniyu/components/compare/help-v0.3.0...help-v0.3.1) (2025-12-07)
+
+
+### 🔧 其他更新
+
+* **help:** Synchronize component versions
+
 ## [0.3.0](https://github.com/puniyu/components/compare/help-v0.2.0...help-v0.3.0) (2025-12-07)
 
 
