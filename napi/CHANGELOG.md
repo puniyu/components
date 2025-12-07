@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/puniyu/components/compare/napi-v0.3.1...napi-v0.3.2) (2025-12-07)
+
+
+### 🔧 其他更新
+
+* **napi:** 支持帮助项和主题背景图可选 ([f981b09](https://github.com/puniyu/components/commit/f981b09e92e5889a5fabc258abe8b47845bb78bd))
+
 ## [0.3.1](https://github.com/puniyu/components/compare/napi-v0.3.0...napi-v0.3.1) (2025-12-07)
 
 
