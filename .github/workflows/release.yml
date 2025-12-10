@@ -79,16 +79,17 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
           repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
 
-      - name: 设置 bun
-        uses: oven-sh/setup-bun@v2
+      - name: 配置 pnpm
+        uses: pnpm/action-setup@v4
         with:
-          bun-version: latest
+          version: 10.24.0
+          run_install: true
 
       - name: 构建node
         run: |
-          bun install
-          cd node
-          bun run build
+          pnpm install
+          bun build
+        working-directory: node
 
       - name: 发布node
         uses: JS-DevTools/npm-publish@v4

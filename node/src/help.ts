@@ -39,7 +39,6 @@ const COLOR = {
  */
 export async function help(options: HelpList): Promise<Buffer> {
   const { title, theme, list } = options
-  console.log(filePath)
   GlobalFonts.registerFromPath(FONT_PATH, 'DouyinSansBold')
 
   const height = calcHeight(options)
