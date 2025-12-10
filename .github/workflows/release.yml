@@ -88,7 +88,7 @@ jobs:
       - name: 构建node
         run: |
           pnpm install
-          bun build
+          pnpm build
         working-directory: node
 
       - name: 发布node
