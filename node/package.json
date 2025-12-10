@@ -25,7 +25,6 @@
   "scripts": {
     "build": "tsc --noEmit && tsdown"
   },
-  "packageManager": "pnpm@10.24.0",
   "dependencies": {
     "canvas": "npm:@napi-rs/canvas@^0.1.84"
   }
