@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/puniyu/components/compare/node-v0.4.3...node-v0.5.0) (2025-12-10)
+
+
+### ♻️ 代码重构
+
+* **node:** 重构node组件实现 ([f304fa2](https://github.com/puniyu/components/commit/f304fa22952707bd5cdd3573ad3d2f77ddfb0e8f))
+
 ## [0.4.2](https://github.com/puniyu/components/compare/napi-v0.4.1...napi-v0.4.2) (2025-12-07)
 
 
