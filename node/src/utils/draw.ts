@@ -105,3 +105,49 @@ export function drawCard(options: GlassCardOptions) {
   ctx.fill()
   ctx.restore()
 }
+
+export interface WrapTextOptions {
+  ctx: SKRSContext2D
+  text: string
+  x: number
+  y: number
+  maxWidth: number
+  lineHeight: number
+}
+
+/**
+ * 绘制自动换行的文本
+ */
+export function drawWrapText({
+  ctx,
+  text,
+  x,
+  y,
+  maxWidth,
+  lineHeight,
+}: WrapTextOptions): number {
+  const words = text.split('')
+  let line = ''
+  let currentY = y
+  let lineCount = 0
+
+  for (let i = 0; i < words.length; i++) {
+    const testLine = line + words[i]
+    const metrics = ctx.measureText(testLine)
+    const testWidth = metrics.width
+
+    if (testWidth > maxWidth && i > 0) {
+      ctx.fillText(line, x, currentY)
+      line = words[i]
+      currentY += lineHeight
+      lineCount++
+    } else {
+      line = testLine
+    }
+  }
+
+  ctx.fillText(line, x, currentY)
+  lineCount++
+
+  return lineCount * lineHeight
+}
