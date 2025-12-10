@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       help: ${{ steps.release-please.outputs['packages/puniyu_component_help--release_created'] }}
-      node: ${{ steps.release-please.outputs['napi--release_created'] }}
+      node: ${{ steps.release-please.outputs['node--release_created'] }}
     steps:
       - name: 获取token
         uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
@@ -55,6 +55,11 @@ jobs:
           target: ${{ matrix.platform.target }}
           save-cache: true
           prefix-key: puniyu-component
+
+      - name: 设置apt 包
+        uses: awalsh128/cache-apt-pkgs-action@2c09a5e66da6c8016428a2172bd76e5e4f14bb17 # v1
+        with:
+          packages: pkg-config libssl-dev libfontconfig-dev
 
       - name: 发布component-help
         if: needs.release.outputs.help

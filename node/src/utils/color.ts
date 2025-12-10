@@ -7,9 +7,7 @@ export function parseColor(s: string): Color {
   const str = s.trim()
 
   if (str.startsWith('rgb')) {
-    const inner = str
-      .replace(/^rgba?\(/, '')
-      .replace(/\)$/, '')
+    const inner = str.replace(/^rgba?\(/, '').replace(/\)$/, '')
     const parts = inner.split(',').map((p) => p.trim())
     if (parts.length >= 3) {
       const r = parseInt(parts[0], 10) || 0
@@ -18,7 +16,7 @@ export function parseColor(s: string): Color {
       const a = parts.length >= 4 ? parseFloat(parts[3]) : 1
       return { r, g, b, a }
     }
-    return { r: 0, g: 0, b: 0, a: 1 } 
+    return { r: 0, g: 0, b: 0, a: 1 }
   }
 
   // #RGB, #RRGGBB, #AARRGGBB

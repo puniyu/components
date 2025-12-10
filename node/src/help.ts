@@ -13,7 +13,6 @@ import { fileURLToPath } from 'node:url'
 const filePath = dirname(fileURLToPath(import.meta.url))
 const FONT_PATH = join(filePath, '../fonts/DouyinSansBold.ttf')
 
-
 // 配置常量
 const WIDTH = 600
 const PADDING = 24
@@ -41,7 +40,7 @@ const COLOR = {
 export async function help(options: HelpList): Promise<Buffer> {
   const { title, theme, list } = options
   console.log(filePath)
-GlobalFonts.registerFromPath(FONT_PATH, 'DouyinSansBold')
+  GlobalFonts.registerFromPath(FONT_PATH, 'DouyinSansBold')
 
   const height = calcHeight(options)
   const canvas = createCanvas(WIDTH * SCALE, height * SCALE)
