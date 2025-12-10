@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/puniyu/components/compare/node-v0.5.0...node-v0.5.1) (2025-12-10)
+
+
+### 🔧 其他更新
+
+* **release:** 更新release-please输出变量名称 ([0123b69](https://github.com/puniyu/components/commit/0123b692594ae9b6cb3c7d1b63c7925529b5ef87))
+
 ## [0.5.0](https://github.com/puniyu/components/compare/node-v0.4.3...node-v0.5.0) (2025-12-10)
 
 
