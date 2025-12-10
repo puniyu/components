@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/puniyu/components/compare/node-v0.5.2...node-v0.6.0) (2025-12-10)
+
+
+### ✨ 新功能
+
+* **help:** 实现帮助卡片高度自适应和文本自动换行 ([c5edae2](https://github.com/puniyu/components/commit/c5edae293c6c18528b43282b82184f3946fd57c9))
+
+
+### 🔧 其他更新
+
+* **deps:** 更新 pnpm 版本至 10.24.0 ([7c65974](https://github.com/puniyu/components/commit/7c6597425b6154e05f3b92308798cc30f5d5cc6f))
+
 ## [0.5.2](https://github.com/puniyu/components/compare/node-v0.5.1...node-v0.5.2) (2025-12-10)
 
 
