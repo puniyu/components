@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/puniyu/components/compare/node-v0.5.1...node-v0.5.2) (2025-12-10)
+
+
+### 🔧 其他更新
+
+* **release:** 更新构建流程以使用 pnpm 和 bun ([c65357d](https://github.com/puniyu/components/commit/c65357d96950abf15fedb41d660b28be7f8b1462))
+
 ## [0.5.1](https://github.com/puniyu/components/compare/node-v0.5.0...node-v0.5.1) (2025-12-10)
 
 
