@@ -1,5 +1,5 @@
 [workspace]
-members = ["napi",
+members = [
     "packages/*",
 ]
 resolver = "2"

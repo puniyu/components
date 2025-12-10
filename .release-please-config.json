@@ -6,8 +6,8 @@
       "type": "linked-versions",
       "groupName": "component",
       "components": [
-        "help",
-        "napi"
+        "component-help",
+        "node"
       ]
     }
   ],
@@ -76,18 +76,11 @@
   "packages": {
     "packages/puniyu_component_help": {
       "release-type": "rust",
-      "component": "help"
+      "component": "component-help"
     },
-    "napi": {
-      "release-type": "rust",
-      "component": "napi",
-      "extra-files": [
-        {
-          "type": "json",
-          "path": "package.json",
-          "jsonpath": "$.version"
-        }
-      ]
+    "node": {
+      "release-type": "node",
+      "component": "node"
     }
   },
   "commit-search-depth": 50
